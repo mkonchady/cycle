@@ -22,4 +22,26 @@ def get_density(alt, temp, rh):
         saturated_pressure = 0.61078 * math.exp( (21.875 * temp) / (temp + 265.5) )
     return (0.0034848 / kelvin) * (pressure * 100 - 0.0037960 * rh * saturated_pressure)
 
-print (get_density(0, 25, 50))
+# Main
+TOLERANCE = 0.1
+
+# Test 1
+expected = 1.18
+temp = 25 # centigrade
+rh = 50 # humidity percentage
+alt = 0 # altitude in meters
+assert (get_density(alt, temp, rh) - expected) < TOLERANCE, "1: Did not match expected value of " + str(expected)
+
+# Test 2
+expected = 0.971
+temp = 10 # centigrade
+rh = 80 # humidity percentage
+alt = 2000 # altitude in meters
+assert (get_density(alt, temp, rh) - expected) < TOLERANCE, "2: Did not match expected value of " + str(expected)
+
+# Test 3
+expected = 1.18
+temp = -10 # centigrade
+rh = 50 # humidity percentage
+alt = 1000 # altitude in meters
+assert (get_density(alt, temp, rh) - expected) < TOLERANCE, "3: Did not match expected value of " + str(expected)
