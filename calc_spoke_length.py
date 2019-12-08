@@ -1,6 +1,6 @@
 # 
 # Spoke length Calculator
-# Copyright (c) 2018 Manu Konchady
+# Copyright (c) 2020 Manu Konchady
 #
 # Tested with http://www.sapim.be/spoke-calculator
 #

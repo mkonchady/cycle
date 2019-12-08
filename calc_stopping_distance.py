@@ -1,5 +1,5 @@
 #*-------------------------------------------------------------
-#*-  Calculate the stopping distance using methods
+#*-  Calculate the stopping distance using several methods
 #*-------------------------------------------------------------
 
 import math

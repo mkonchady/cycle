@@ -4,8 +4,6 @@ import sys
 # Wind Calculator
 # Copyright (c) 2020 Manu Konchady
 #
-# Tested with bikecalculator.com
-#
 # calculate head wind from bike velocity headed in 0 degree, wind velocity from wind_d degrees
 # wind_mag and wind_deg are the magnitude and direction of origin of the wind
 # bike_mag and bike_deg are the magnitude and direction of the bicycle travel

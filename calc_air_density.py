@@ -2,7 +2,7 @@ import math
 import sys
 
 # Altitude, Pressure and Air Density Calculators
-# Copyright (c) 2019 Manu Konchady
+# 
 
 # Constants
 ALT_DENSITY_POWER = 1.0 / 5.257
