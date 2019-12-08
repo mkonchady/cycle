@@ -1,6 +1,6 @@
 #
 # Coast Down Test for a Bicycle
-# Copyright (c) 2018 Manu Konchady
+# Copyright (c) 2020 Manu Konchady
 #
 # calculate the best c_r for a coast down time and velocity
 #
