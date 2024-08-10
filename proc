@@ -1,0 +1,78 @@
+import os
+import pandas as pd
+from collections import defaultdict
+import math
+
+#*--- Constants
+DIR = "andhra"
+OFILE = DIR + ".csv"
+
+def capitalize(instr):
+    parts = instr.lower().split(" ")
+    outstr = ""
+    for part in parts:
+        if len(part) == 3:
+            if part == "and":
+                outstr = outstr + part + " "
+            else:
+                outstr = outstr + part.upper() + " "
+        else:
+            part = part.lstrip('-')
+            if (len(part) > 2):
+                outstr = outstr + part[0].upper() + part[1:] + " "
+    return outstr.strip()
+
+
+#*-- build the list of spreadsheets in the directory
+def build_flist(DIR):
+    flist = []
+    for file in os.listdir(DIR):
+        if file.endswith('.xlsx'):
+            flist.append(file)
+    return (flist)
+
+#*-- Main
+os.chdir("/home/mkonchady/Documents/manu/articles/ayushman")
+flist = build_flist(DIR)
+f = open(OFILE, "w")
+for file in flist:
+    file_path = DIR + "/" + file
+    df1 = pd.read_excel(file_path, engine='openpyxl', dtype=object, header=None)
+    count_zero = 0
+    count_non_zero = 0
+    maximum = 0
+    total = 0
+    for index, row in df1.iterrows(): #*-- extract the state, district, and hospital names
+        if index == 0:
+            header = row[0]
+            parts = header.split(",")
+            state_name = parts[0].replace("State Name : ", "").strip()
+            district_name = parts[1].replace("District Name : ", "").strip()
+            hospital_name = parts[2].replace("Hospital Name : ", "").strip()
+        elif index == 1:
+            continue
+        else:
+            amount = row[3]
+            if amount == 0:
+                count_zero = count_zero + 1
+            else:
+                count_non_zero = count_non_zero + 1
+                total = total + amount   
+            if (amount > maximum):
+                maximum = amount
+        
+    total_count = count_non_zero + count_zero
+    average = 0
+    if (total_count != 0):
+        average = int(total / total_count)
+    oline = capitalize(state_name) + "," + capitalize(district_name) + "," + capitalize(hospital_name) + "," + \
+          str(count_zero) + "," + str(count_non_zero) + "," + str(maximum) + "," + str(average)    
+    # count the number of commas (should be 6)
+    res = sum(1 for c in oline if c == ",")
+    if res != 6:
+        print ("******** Error in line: " + oline)    
+    f.write(oline + "\n")
+
+
+f.close()
+print ("Done")
